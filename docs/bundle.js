@@ -6076,24 +6076,27 @@ var $author$project$Main$loadDay = function (dayNum) {
 				aP: url
 			}));
 };
+var $elm$core$List$sum = function (numbers) {
+	return A3($elm$core$List$foldl, $elm$core$Basics$add, 0, numbers);
+};
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (!maybe.$) {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
 var $author$project$Day0$part1 = function (text) {
 	var toInt = function (s) {
-		var _v0 = $elm$core$String$toInt(s);
-		if (!_v0.$) {
-			var n = _v0.a;
-			return n;
-		} else {
-			return 0;
-		}
+		return A2(
+			$elm$core$Maybe$withDefault,
+			0,
+			$elm$core$String$toInt(s));
 	};
 	return $elm$core$String$fromInt(
-		A3(
-			$elm$core$List$foldl,
-			F2(
-				function (n, acc) {
-					return acc + n;
-				}),
-			0,
+		$elm$core$List$sum(
 			A2(
 				$elm$core$List$map,
 				toInt,
