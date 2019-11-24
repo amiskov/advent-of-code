@@ -1,0 +1,16 @@
+:root {
+    --font-family: "iA Writer Quattro S"
+}
+
+@font-face {
+    font-family: var(--font-family);
+    src: local(var(--font-family)), url("../fonts/iAWriterQuattroS-Regular.woff2") format("woff2");
+}
+
+body {
+    font: 18px/1.4 var(--font-family);
+}
+
+button {
+    font: var(--font-family);
+}
