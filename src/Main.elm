@@ -57,7 +57,7 @@ update msg model =
 loadDay dayNum =
     let
         url =
-            "/inputs/day" ++ String.fromInt dayNum ++ ".txt"
+            "inputs/day" ++ String.fromInt dayNum ++ ".txt"
     in
     ( Loading
     , Http.get

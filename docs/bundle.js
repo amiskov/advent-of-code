@@ -6067,7 +6067,7 @@ var $elm$http$Http$get = function (r) {
 		{as: $elm$http$Http$emptyBody, aw: r.aw, Q: _List_Nil, aB: 'GET', aM: $elm$core$Maybe$Nothing, ak: $elm$core$Maybe$Nothing, aP: r.aP});
 };
 var $author$project$Main$loadDay = function (dayNum) {
-	var url = '/inputs/day' + ($elm$core$String$fromInt(dayNum) + '.txt');
+	var url = 'inputs/day' + ($elm$core$String$fromInt(dayNum) + '.txt');
 	return _Utils_Tuple2(
 		$author$project$Main$Loading,
 		$elm$http$Http$get(
