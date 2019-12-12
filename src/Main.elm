@@ -2,6 +2,7 @@ module Main exposing (main)
 
 import Browser
 import Day0
+import Day1
 import Html exposing (Html, button, div, pre, text)
 import Html.Events exposing (onClick)
 import Http
@@ -11,7 +12,7 @@ type Model
     = Silence
     | Failure
     | Loading
-    | Success String
+    | Success Day String
 
 
 type Msg
@@ -46,7 +47,7 @@ update msg model =
                 Ok inputData ->
                     let
                         answer =
-                            Day0.part1 inputData
+                            Day1.part1 inputData
                     in
                     ( Success answer, Cmd.none )
 
