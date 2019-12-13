@@ -1,18 +1,24 @@
 module Main exposing (main)
 
+import Array exposing (Array, map)
 import Browser
 import Day0
 import Day1
+import Day2
 import Html exposing (Html, button, div, pre, text)
 import Html.Events exposing (onClick)
 import Http
+
+
+days =
+    Array.fromList [ ( Day0.part1, Day0.part2 ) ]
 
 
 type Model
     = Silence
     | Failure
     | Loading
-    | Success Day String
+    | Success String
 
 
 type Msg
@@ -47,7 +53,7 @@ update msg model =
                 Ok inputData ->
                     let
                         answer =
-                            Day1.part1 inputData
+                            Array.get n inputData
                     in
                     ( Success answer, Cmd.none )
 
