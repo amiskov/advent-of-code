@@ -8,13 +8,6 @@ type alias Program =
     Array Int
 
 
-type alias Instruction =
-    { pointer : Int
-    , opcode : Int
-    , parameters : Array Int
-    }
-
-
 type alias Memory =
     { program : Program
     , address : Int -- position of ther pointer
