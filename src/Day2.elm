@@ -10,7 +10,7 @@ type alias Program =
 
 type alias Memory =
     { program : Program
-    , address : Int -- position of ther pointer
+    , address : Int -- position of the pointer
     }
 
 

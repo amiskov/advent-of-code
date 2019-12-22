@@ -21,6 +21,11 @@ type State
     | Halted Memory
 
 
+type Mode
+    = Position
+    | Immediate
+
+
 main =
     text "Day 5"
 
@@ -38,6 +43,28 @@ toInt s =
 parseCode str =
     String.split "," str
         |> List.map toInt
+
+
+type alias Instruction =
+    { opcode : Int
+    , modes : Int
+    , params : List Int
+    }
+
+
+parseInstruction : Int -> Memory -> Instruction
+parseInstruction address mem =
+    let
+        opcode =
+            remainderBy 100 (read address mem.program)
+
+        modes =
+            read address mem.program // 100
+    in
+    { opcode = opcode
+    , modes = modes
+    , params = []
+    }
 
 
 doBinaryOp : Int -> Memory -> (Int -> Int -> Int) -> State
@@ -65,20 +92,40 @@ doBinaryOp opcodeAddress memory fn =
         }
 
 
+read : Int -> Program -> Int
 read address program =
     program |> Array.get address |> Maybe.withDefault 0
 
 
+readParamValue address mode program =
+    case mode of
+        0 ->
+            read (read address program) program
+
+        1 ->
+            read address program
+
+        _ ->
+            0
+
+
 runInstruction : Int -> Memory -> State
 runInstruction opcodeAddress memory =
-    case Array.get opcodeAddress memory.program of
-        Just 1 ->
+    let
+        opcode =
+            remainderBy 100 (read opcodeAddress memory.program)
+
+        modes =
+            read opcodeAddress memory.program // 100
+    in
+    case opcode of
+        1 ->
             doBinaryOp opcodeAddress memory (+)
 
-        Just 2 ->
+        2 ->
             doBinaryOp opcodeAddress memory (*)
 
-        Just 3 ->
+        3 ->
             let
                 resultAddress =
                     read (opcodeAddress + 1) memory.program
@@ -98,7 +145,7 @@ runInstruction opcodeAddress memory =
                             , address = memory.address + 2
                         }
 
-        Just 4 ->
+        4 ->
             let
                 outputAddress =
                     read (opcodeAddress + 1) memory.program
@@ -112,7 +159,7 @@ runInstruction opcodeAddress memory =
                     , address = memory.address + 2
                 }
 
-        Just 99 ->
+        99 ->
             Halted memory
 
         _ ->
