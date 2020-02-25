@@ -1,3 +1,6 @@
+-- https://adventofcode.com/2019/day/5
+
+
 module Day5 exposing (..)
 
 import Array exposing (..)
@@ -12,7 +15,7 @@ type alias Memory =
     { program : Program
     , input : List Int
     , output : List Int
-    , address : Int -- position of ther pointer
+    , address : Int -- pointer position
     }
 
 
@@ -114,9 +117,6 @@ runInstruction opcodeAddress memory =
     let
         opcode =
             remainderBy 100 (read opcodeAddress memory.program)
-
-        modes =
-            read opcodeAddress memory.program // 100
     in
     case opcode of
         1 ->

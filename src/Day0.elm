@@ -17,5 +17,6 @@ part1 text =
         |> List.sum
         |> String.fromInt
 
+
 part2 text =
     Debug.todo "Part 2 solution"
